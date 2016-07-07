@@ -1,3 +1,5 @@
+source \$HOME/.rvm/scripts/rvm
+
 function fish_prompt --description 'Write out the prompt'
     # Just calculate these once, to save a few cycles when displaying the prompt
     if not set -q __fish_prompt_hostname
@@ -24,7 +26,7 @@ function fish_prompt --description 'Write out the prompt'
         end
     end
 
-    printf '%s@%s:%s%s%s[%s]# ' $USER $__fish_prompt_hostname "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" $__git_cb
+    printf '%s:%s%s%s[%s]# ' $USER "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" $__git_cb
 
     case '*'
 
@@ -35,4 +37,15 @@ function fish_prompt --description 'Write out the prompt'
     printf '%s@%s:%s%s%s[%s]$ ' $USER $__fish_prompt_hostname "$__fish_prompt_cwd" (prompt_pwd) "$__fish_prompt_normal" $__git_cb
 
     end
+end
+rvm default
+
+set -x GOPATH $HOME/projects
+set PATH $PATH ~/swift/usr/bin
+set -x EDITOR 'vim'
+
+if [ "$COLORTERM" = "gnome-terminal" ] or [ "$COLORTERM" = "xfce4-terminal" ]
+  set -x TERM xterm-256color
+elif [ "$COLORTERM" = "rxvt-xpm" ]
+  set -x TERM rxvt-256color
 end
